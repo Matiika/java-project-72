@@ -5,7 +5,7 @@ public class Main {
         System.out.println("Hello world!");
     }
 
-    public static int plus (int x, int y){
+    public static int plus(int x, int y) {
         return x + y;
     }
 }
