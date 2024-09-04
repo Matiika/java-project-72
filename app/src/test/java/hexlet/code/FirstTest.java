@@ -8,7 +8,7 @@ public class FirstTest {
 
     @Test
     public void mainTest() {
-        var a = Main.plus(1, 1);
+        var a = App.plus(1, 1);
         assertEquals(2, 2);
     }
 }
