@@ -16,6 +16,10 @@ import io.javalin.rendering.template.JavalinJte;
 import io.javalin.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 
+import gg.jte.ContentType;
+import gg.jte.TemplateEngine;
+import gg.jte.resolve.ResourceCodeResolver;
+
 @Slf4j
 public class App {
 
@@ -59,7 +63,7 @@ public class App {
 
         var app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
-            config.fileRenderer(new JavalinJte());
+            config.fileRenderer(new JavalinJte(createTemplateEngine()));
         });
 
         app.before(ctx -> {
@@ -67,10 +71,17 @@ public class App {
         });
 
         app.get("/", ctx -> {
-            ctx.result("<h1>Hello Hexlet</h1>");
+            ctx.render("index.jte");
         });
 
         return app;
+    }
+
+    private static TemplateEngine createTemplateEngine() {
+        ClassLoader classLoader = App.class.getClassLoader();
+        ResourceCodeResolver codeResolver = new ResourceCodeResolver("templates", classLoader);
+        TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html);
+        return templateEngine;
     }
 
     public static int plus(int x, int y) {
