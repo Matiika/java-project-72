@@ -10,7 +10,10 @@ import java.util.stream.Collectors;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import hexlet.code.controller.UrlsController;
 import hexlet.code.repository.BaseRepository;
+import hexlet.code.repository.UrlRepository;
+import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import io.javalin.validation.ValidationException;
@@ -72,9 +75,13 @@ public class App {
             ctx.contentType("text/html; charset=utf-8");
         });
 
-        app.get("/", ctx -> {
-            ctx.render("index.jte");
+        app.get(NamedRoutes.rootPath(), ctx -> {
+            ctx.render("urls/index.jte");
         });
+
+        app.post(NamedRoutes.urlsPath(), UrlsController::create);
+
+        app.get(NamedRoutes.urlsPath(), UrlsController::index);
 
         return app;
     }

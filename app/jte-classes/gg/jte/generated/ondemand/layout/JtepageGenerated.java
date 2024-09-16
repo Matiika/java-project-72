@@ -4,7 +4,7 @@ public final class JtepageGenerated {
 	public static final String JTE_NAME = "layout/page.jte";
 	public static final int[] JTE_LINE_INFO = {1,1,3,3,3,14,14,14,14,17,17,17,3,3,3,3};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Content content) {
-		jteOutput.writeContent("\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Hexlet Javalin Example</title>\n</head>\n<body>\n<p>Hello Hexlet</p>\n");
+		jteOutput.writeContent("\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Hexlet Javalin Example</title>\n</head>\n<body>\n<h1>Анализатор сайтов</h1>\n");
 		jteOutput.setContext("body", null);
 		jteOutput.writeUserContent(content);
 		jteOutput.writeContent("\n</body>\n</html>\n");

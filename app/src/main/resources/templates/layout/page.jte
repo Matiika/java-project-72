@@ -11,7 +11,7 @@
     <title>Hexlet Javalin Example</title>
 </head>
 <body>
-<p>Hello Hexlet</p>
+<h1>Анализатор сайтов</h1>
 ${content}
 </body>
 </html>
