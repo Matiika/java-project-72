@@ -1,8 +1,8 @@
-
 @import gg.jte.Content
+@import hexlet.code.dto.BasePage
 
 @param Content content
-
+@param BasePage page = null
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,7 +11,18 @@
     <title>Hexlet Javalin Example</title>
 </head>
 <body>
-<h1>Анализатор сайтов</h1>
+<p>Анализатор сайтов</p>
+
+@if(page == null)
+    <p>Page == null</p>
+@endif
+
+@if(page != null && page.getFlash() != null)
+    <p>Flash message: ${page.getFlash()}</p>
+@else
+    <p>No flash message</p>
+@endif
+
 ${content}
 </body>
 </html>

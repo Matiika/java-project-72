@@ -75,13 +75,12 @@ public class App {
             ctx.contentType("text/html; charset=utf-8");
         });
 
-        app.get(NamedRoutes.rootPath(), ctx -> {
-            ctx.render("urls/index.jte");
-        });
 
+
+        app.get(NamedRoutes.rootPath(), UrlsController::build);
         app.post(NamedRoutes.urlsPath(), UrlsController::create);
-
         app.get(NamedRoutes.urlsPath(), UrlsController::index);
+
 
         return app;
     }

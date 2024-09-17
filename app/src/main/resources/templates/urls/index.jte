@@ -1,6 +1,10 @@
+@import hexlet.code.dto.BasePage
+
+@param BasePage page
+
 @template.layout.page(
 content = @`
-    <form action="/urls" method="post">
+       <form action="/urls" method="post">
         <div>
             Введите адрес сайта
             <input type="text" name="url">
