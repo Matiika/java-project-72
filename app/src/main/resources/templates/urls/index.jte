@@ -3,6 +3,7 @@
 @param BasePage page
 
 @template.layout.page(
+    page = page,
 content = @`
        <form action="/urls" method="post">
         <div>

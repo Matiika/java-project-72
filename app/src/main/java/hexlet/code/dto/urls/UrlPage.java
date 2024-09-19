@@ -1,18 +1,12 @@
 package hexlet.code.dto.urls;
 
 import hexlet.code.dto.BasePage;
-import io.javalin.validation.ValidationError;
+import hexlet.code.model.Url;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 public class UrlPage extends BasePage {
-    private String name;
-    private Map<String, List<ValidationError<Object>>> errors;
+    private Url url;
 }

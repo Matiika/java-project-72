@@ -80,6 +80,7 @@ public class App {
         app.get(NamedRoutes.rootPath(), UrlsController::build);
         app.post(NamedRoutes.urlsPath(), UrlsController::create);
         app.get(NamedRoutes.urlsPath(), UrlsController::index);
+        app.get(NamedRoutes.urlPath("{id}"), UrlsController::show);
 
 
         return app;
