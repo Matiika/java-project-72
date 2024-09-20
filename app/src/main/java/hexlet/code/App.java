@@ -5,18 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import hexlet.code.controller.UrlsController;
 import hexlet.code.repository.BaseRepository;
-import hexlet.code.repository.UrlRepository;
 import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
-import io.javalin.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 
 import gg.jte.ContentType;

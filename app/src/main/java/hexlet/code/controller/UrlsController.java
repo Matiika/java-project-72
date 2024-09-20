@@ -1,7 +1,6 @@
 package hexlet.code.controller;
 
 import hexlet.code.dto.BasePage;
-import hexlet.code.dto.urls.BuildUrlPage;
 import hexlet.code.dto.urls.UrlPage;
 import hexlet.code.dto.urls.UrlsPage;
 import hexlet.code.model.Url;
@@ -9,7 +8,6 @@ import hexlet.code.repository.UrlRepository;
 import hexlet.code.util.NamedRoutes;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
-import io.javalin.validation.ValidationException;
 import java.net.URI;
 import java.net.URL;
 
@@ -39,7 +37,7 @@ public class UrlsController {
 
             URL url = uri.toURL();
 
-            if(UrlRepository.entityExistsByName(url.toString())) {
+            if (UrlRepository.entityExistsByName(url.toString())) {
                 throw new SQLException();
             }
 
