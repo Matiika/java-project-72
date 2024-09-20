@@ -59,7 +59,7 @@ public class UrlRepository {
                 var name = resultSet.getString("name");
                 var createdAt = resultSet.getTimestamp("created_at");
                 var url = new Url(name);
-                url.setId(UrlId);
+                url.setId(urlId);
                 url.setCreatedAt(createdAt);
                 return Optional.of(url);
             }
