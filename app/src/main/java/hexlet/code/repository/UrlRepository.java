@@ -17,7 +17,7 @@ public class UrlRepository {
     public static void save(Url url) throws SQLException {
         String sql = "INSERT INTO urls (name) VALUES (?)";
         try (var conn = dataSource.getConnection();
-             var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, url.getName());
             preparedStatement.executeUpdate();
             var generatedKeys = preparedStatement.getGeneratedKeys();
@@ -55,11 +55,11 @@ public class UrlRepository {
             stmt.setLong(1, id);
             var resultSet = stmt.executeQuery();
             if (resultSet.next()) {
-                var urlId = resultSet.getLong("id");
+                var UrlId = resultSet.getLong("id");
                 var name = resultSet.getString("name");
                 var createdAt = resultSet.getTimestamp("created_at");
                 var url = new Url(name);
-                url.setId(urlId);
+                url.setId(UrlId);
                 url.setCreatedAt(createdAt);
                 return Optional.of(url);
             }

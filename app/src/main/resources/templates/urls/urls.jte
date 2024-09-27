@@ -1,4 +1,5 @@
 @import hexlet.code.dto.urls.UrlsPage
+@import hexlet.code.util.DateFormatterUtil
 
 @param UrlsPage page
 
@@ -6,16 +7,6 @@
 page = page,
 content = @`
     <h1>Все адреса</h1>
-
-    <table class="table table-striped">
-        @for(var url : page.getUrls())
-            <tr>
-                <td>
-                    ${url.getName()}
-                </td>
-            </tr>
-        @endfor
-    </table>
 
     <table class="table table-bordered table-hover mt-3">
         <thead>
@@ -35,10 +26,16 @@ content = @`
                 <td>
                     <a href="/urls/${url.getId()}">${url.getName()}</a>
                 </td>
-                <td>
-                </td>
-                <td>
-                </td>
+                @for(var check : page.getUrlChecks())
+                    @if(check.getUrlId() == url.getId())
+                        <td>
+                            ${DateFormatterUtil.formatTimestamp(check.getCreatedAt())}
+                        </td>
+                        <td>
+                            ${check.getStatusCode()}
+                        </td>
+                    @endif
+                @endfor
             </tr>
         @endfor
         </tbody>

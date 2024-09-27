@@ -9,16 +9,23 @@ import java.util.stream.Collectors;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import hexlet.code.controller.UrlChecksController;
 import hexlet.code.controller.UrlsController;
 import hexlet.code.repository.BaseRepository;
 import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
+import kong.unirest.core.HttpResponse;
+import kong.unirest.core.JsonNode;
+import kong.unirest.core.Unirest;
 import lombok.extern.slf4j.Slf4j;
 
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 @Slf4j
 public class App {
@@ -40,9 +47,36 @@ public class App {
     }
 
     public static void main(String[] args) throws SQLException, IOException {
+
+        getInfo();
+
         System.out.println("Hello world!");
         var app = getApp();
+
         app.start(getPort());
+
+
+    }
+
+    public static void getInfo() {
+
+            // Send a GET request
+            HttpResponse<String> response = Unirest.get("https://github.com/").asString();
+
+            // Print the status code
+            System.out.println("Status Code: " + response.getStatus());
+
+            // Parse the HTML response
+            Document doc = Jsoup.parse(response.getBody());
+
+            String title = doc.title();
+            String h1 = doc.select("h1").text();
+            String description = doc.select("meta[name=description]").attr("content");
+
+        System.out.println("title: " + title);
+        System.out.println("h1: " + h1);
+        System.out.println("description: " + description);
+
     }
 
     public static Javalin getApp() throws IOException, SQLException {
@@ -77,7 +111,8 @@ public class App {
         app.get(NamedRoutes.rootPath(), UrlsController::build);
         app.post(NamedRoutes.urlsPath(), UrlsController::create);
         app.get(NamedRoutes.urlsPath(), UrlsController::index);
-        app.get(NamedRoutes.urlPath("{id}"), UrlsController::show);
+        app.get(NamedRoutes.urlPath("{id}"), UrlChecksController::show);
+        app.post(NamedRoutes.urlCheckPath("{id}"), UrlChecksController::createUrlCheck);
 
 
         return app;
