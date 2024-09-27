@@ -19,20 +19,25 @@ public class UrlChecksRepository extends BaseRepository {
         String sql = "INSERT INTO url_checks (statusCode, title, h1, description, urlId) VALUES (?,?,?,?,?)";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, String.valueOf(urlCheck.getStatusCode()));
-            preparedStatement.setString(2, String.valueOf(urlCheck.getTitle()));
-            preparedStatement.setString(3, String.valueOf(urlCheck.getH1()));
-            preparedStatement.setString(4, String.valueOf(urlCheck.getDescription()));
-            preparedStatement.setString(5, String.valueOf(urlCheck.getUrlId()));
+
+            // Fix the data type setters here:
+            preparedStatement.setInt(1, urlCheck.getStatusCode()); // Use setInt for statusCode (integer)
+            preparedStatement.setString(2, urlCheck.getTitle());    // Use setString for title (string)
+            preparedStatement.setString(3, urlCheck.getH1());       // Use setString for h1 (string)
+            preparedStatement.setString(4, urlCheck.getDescription()); // Use setString for description (string)
+            preparedStatement.setLong(5, urlCheck.getUrlId());      // Use setLong for urlId (bigint)
+
             preparedStatement.executeUpdate();
+
             var generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 urlCheck.setId(generatedKeys.getLong(1));
             } else {
-                throw new SQLException("DB have not returned an id after saving an entity");
+                throw new SQLException("DB has not returned an id after saving the entity");
             }
         }
     }
+
 
     public static List<UrlCheck> getEntitiesByUrlId(Long urlIdToFind) throws SQLException {
         String sql = "SELECT * FROM url_checks WHERE urlId = ?";  // Ensure the column name is correct
