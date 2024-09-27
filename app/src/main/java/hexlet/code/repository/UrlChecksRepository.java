@@ -35,10 +35,13 @@ public class UrlChecksRepository extends BaseRepository {
     }
 
     public static List<UrlCheck> getEntitiesByUrlId(Long urlIdToFind) throws SQLException {
-        String sql = "SELECT * FROM url_checks WHERE urlId = ?";
+        String sql = "SELECT * FROM url_checks WHERE urlId = ?";  // Ensure the column name is correct
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, String.valueOf(urlIdToFind));
+
+            // Use setLong to pass a bigint (Long) value to the query
+            stmt.setLong(1, urlIdToFind);
+
             var resultSet = stmt.executeQuery();
             var result = new ArrayList<UrlCheck>();
             while (resultSet.next()) {
@@ -56,6 +59,7 @@ public class UrlChecksRepository extends BaseRepository {
             return result;
         }
     }
+
 
     public static List<UrlCheck> getLatestUrlChecksBySQL() throws SQLException {
         String sql = "SELECT uc.* "
