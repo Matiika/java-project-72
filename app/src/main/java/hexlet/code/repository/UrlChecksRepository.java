@@ -1,6 +1,5 @@
 package hexlet.code.repository;
 
-import hexlet.code.model.Url;
 import hexlet.code.model.UrlCheck;
 
 import java.sql.SQLException;
@@ -8,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UrlChecksRepository extends BaseRepository{
+public class UrlChecksRepository extends BaseRepository {
 
     private Integer statusCode;
     private String title;
@@ -59,14 +58,14 @@ public class UrlChecksRepository extends BaseRepository{
     }
 
     public static List<UrlCheck> getLatestUrlChecksBySQL() throws SQLException {
-        String sql = "SELECT uc.* " +
-                "FROM url_checks uc " +
-                "INNER JOIN (" +
-                "SELECT urlId, MAX(created_at) as max_created_at " +
-                "FROM url_checks " +
-                "GROUP BY urlId" +
-                ") latest ON uc.urlId = latest.urlId " +
-                "AND uc.created_at = latest.max_created_at";
+        String sql = "SELECT uc.* "
+                + "FROM url_checks uc "
+                + "INNER JOIN ("
+                + "SELECT urlId, MAX(created_at) as max_created_at "
+                + "FROM url_checks "
+                + "GROUP BY urlId"
+                + ") latest ON uc.urlId = latest.urlId "
+                + "AND uc.created_at = latest.max_created_at";
 
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {

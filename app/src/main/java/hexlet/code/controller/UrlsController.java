@@ -73,7 +73,4 @@ public class UrlsController {
 //        var page = new UrlPage(product);
 //        ctx.render("urls/url.jte", model("page", page));
 //    }
-
-
-
 }

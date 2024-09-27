@@ -1,7 +1,6 @@
 package hexlet.code.controller;
 
 import hexlet.code.dto.urls.UrlChecksPage;
-import hexlet.code.model.Url;
 import hexlet.code.model.UrlCheck;
 import hexlet.code.repository.UrlChecksRepository;
 import hexlet.code.repository.UrlRepository;
@@ -13,10 +12,6 @@ import kong.unirest.core.Unirest;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.sql.SQLException;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
