@@ -6,6 +6,8 @@
 @template.layout.page(
 page = page,
 content = @`
+    <main class="flex-grow-1">
+    <section class="container-lg mt-5">
     <h1>Все адреса</h1>
 
     <table class="table table-bordered table-hover mt-3">
@@ -40,5 +42,7 @@ content = @`
         @endfor
         </tbody>
     </table>
+    </section>
+    </main>
 `
 )

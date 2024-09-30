@@ -13,6 +13,6 @@ CREATE TABLE url_checks (
     title VARCHAR(255),
     h1 text,
     description text,
-    urlId bigint REFERENCES urls(id) ON DELETE CASCADE,
+    url_Id bigint REFERENCES urls(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );

@@ -16,7 +16,7 @@ public class UrlChecksRepository extends BaseRepository {
     private Long urlId;
 
     public static void save(UrlCheck urlCheck) throws SQLException {
-        String sql = "INSERT INTO url_checks (statusCode, title, h1, description, urlId) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO url_checks (statusCode, title, h1, description, url_Id) VALUES (?,?,?,?,?)";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -40,7 +40,7 @@ public class UrlChecksRepository extends BaseRepository {
 
 
     public static List<UrlCheck> getEntitiesByUrlId(Long urlIdToFind) throws SQLException {
-        String sql = "SELECT * FROM url_checks WHERE urlId = ?";  // Ensure the column name is correct
+        String sql = "SELECT * FROM url_checks WHERE url_Id = ?";  // Ensure the column name is correct
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {
 
@@ -55,7 +55,7 @@ public class UrlChecksRepository extends BaseRepository {
                 var title = resultSet.getString("title");
                 var h1 = resultSet.getString("h1");
                 var description = resultSet.getString("description");
-                var urlId = resultSet.getLong("urlId");
+                var urlId = resultSet.getLong("url_Id");
                 var createdAt = resultSet.getTimestamp("created_at");
 
                 var urlCheck = new UrlCheck(id, statusCode, title, h1, description, urlId, createdAt);
@@ -70,10 +70,10 @@ public class UrlChecksRepository extends BaseRepository {
         String sql = "SELECT uc.* "
                 + "FROM url_checks uc "
                 + "INNER JOIN ("
-                + "SELECT urlId, MAX(created_at) as max_created_at "
+                + "SELECT url_Id, MAX(created_at) as max_created_at "
                 + "FROM url_checks "
-                + "GROUP BY urlId"
-                + ") latest ON uc.urlId = latest.urlId "
+                + "GROUP BY url_Id"
+                + ") latest ON uc.url_Id = latest.url_Id "
                 + "AND uc.created_at = latest.max_created_at";
 
         try (var conn = dataSource.getConnection();
@@ -86,7 +86,7 @@ public class UrlChecksRepository extends BaseRepository {
                 var title = resultSet.getString("title");
                 var h1 = resultSet.getString("h1");
                 var description = resultSet.getString("description");
-                var urlId = resultSet.getLong("urlId");
+                var urlId = resultSet.getLong("url_Id");
                 var createdAt = resultSet.getTimestamp("created_at");
 
                 var urlCheck = new UrlCheck(id, statusCode, title, h1, description, urlId, createdAt);
