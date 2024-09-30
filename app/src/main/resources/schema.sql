@@ -9,10 +9,10 @@ CREATE TABLE urls (
 
 CREATE TABLE url_checks (
     id SERIAL PRIMARY KEY,
-    statusCode INTEGER NOT NULL,
+    status_code INTEGER NOT NULL,
     title VARCHAR(255),
     h1 text,
     description text,
-    url_Id bigint REFERENCES urls(id) ON DELETE CASCADE,
+    url_id bigint REFERENCES urls(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
