@@ -1,3 +1,6 @@
+A site that analyzes specific pages for SEO suitability.
+
+To use, you must first add a site to the list. Then select the site and click the blue "Run Check" button. The program will analyze the page and show the status code, title, h1 and description. The program will save the date and unique verification number.
 
 <img width="2544" alt="Снимок экрана 2024-10-02 в 21 25 55" src="https://github.com/user-attachments/assets/b658a226-93f4-4796-acc0-f0aefc38486b">
 
