@@ -4,28 +4,24 @@ import hexlet.code.model.UrlCheck;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UrlChecksRepository extends BaseRepository {
 
-    private Integer statusCode;
-    private String title;
-    private String h1;
-    private String description;
-    private Long urlId;
-
     public static void save(UrlCheck urlCheck) throws SQLException {
-        String sql = "INSERT INTO url_checks (status_code, title, h1, description, url_Id) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO url_checks (status_code, title, h1, description, url_Id, created_at) VALUES (?,?,?,?,?,?)";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            // Fix the data type setters here:
-            preparedStatement.setInt(1, urlCheck.getStatusCode()); // Use setInt for statusCode (integer)
-            preparedStatement.setString(2, urlCheck.getTitle());    // Use setString for title (string)
-            preparedStatement.setString(3, urlCheck.getH1());       // Use setString for h1 (string)
-            preparedStatement.setString(4, urlCheck.getDescription()); // Use setString for description (string)
-            preparedStatement.setLong(5, urlCheck.getUrlId());      // Use setLong for urlId (bigint)
+            // Set data for the columns
+            preparedStatement.setInt(1, urlCheck.getStatusCode());       // Use setInt for statusCode (integer)
+            preparedStatement.setString(2, urlCheck.getTitle());         // Use setString for title (string)
+            preparedStatement.setString(3, urlCheck.getH1());            // Use setString for h1 (string)
+            preparedStatement.setString(4, urlCheck.getDescription());   // Use setString for description (string)
+            preparedStatement.setLong(5, urlCheck.getUrlId());           // Use setLong for urlId (bigint)
+            preparedStatement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));  // Use setTimestamp for created_at (Timestamp)
 
             preparedStatement.executeUpdate();
 
@@ -37,6 +33,7 @@ public class UrlChecksRepository extends BaseRepository {
             }
         }
     }
+
 
 
     public static List<UrlCheck> getEntitiesByUrlId(Long urlIdToFind) throws SQLException {

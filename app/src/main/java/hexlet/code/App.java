@@ -46,7 +46,7 @@ public class App {
 
     public static void main(String[] args) throws SQLException, IOException {
 
-        getInfo();
+
 
         System.out.println("Hello world!");
         var app = getApp();
