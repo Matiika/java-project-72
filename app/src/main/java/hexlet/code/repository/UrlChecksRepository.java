@@ -13,7 +13,7 @@ public class UrlChecksRepository extends BaseRepository {
     public static void save(UrlCheck urlCheck) throws SQLException {
         String sql =
                 "INSERT INTO url_checks (status_code, title, h1, description, url_Id, created_at)"
-        + "VALUES (?,?,?,?,?,?)";
+            + "VALUES (?,?,?,?,?,?)";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
