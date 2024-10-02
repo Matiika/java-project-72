@@ -22,7 +22,8 @@ public class UrlRepository {
 
             // Set data for the columns
             preparedStatement.setString(1, url.getName());              // Use setString for name (string)
-            preparedStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));      // Use setTimestamp for created_at (Timestamp)
+            preparedStatement.setTimestamp(2,
+                    new Timestamp(System.currentTimeMillis()));      // Use setTimestamp for created_at (Timestamp)
 
             preparedStatement.executeUpdate();
 

@@ -11,7 +11,9 @@ import java.util.List;
 public class UrlChecksRepository extends BaseRepository {
 
     public static void save(UrlCheck urlCheck) throws SQLException {
-        String sql = "INSERT INTO url_checks (status_code, title, h1, description, url_Id, created_at) VALUES (?,?,?,?,?,?)";
+        String sql =
+                "INSERT INTO url_checks (status_code, title, h1, description, url_Id, created_at)"
+        + "VALUES (?,?,?,?,?,?)";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -21,7 +23,8 @@ public class UrlChecksRepository extends BaseRepository {
             preparedStatement.setString(3, urlCheck.getH1());            // Use setString for h1 (string)
             preparedStatement.setString(4, urlCheck.getDescription());   // Use setString for description (string)
             preparedStatement.setLong(5, urlCheck.getUrlId());           // Use setLong for urlId (bigint)
-            preparedStatement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));  // Use setTimestamp for created_at (Timestamp)
+            preparedStatement.setTimestamp(6,
+                    new Timestamp(System.currentTimeMillis()));  // Use setTimestamp for created_at (Timestamp)
 
             preparedStatement.executeUpdate();
 
